@@ -1,0 +1,3 @@
+R2(StudentId, StudentName, GroupId) :-
+	Groups(GroupId, GroupName),	Students(StudentId, StudentName, GroupId),
+    GroupName = :GroupName.

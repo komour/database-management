@@ -1,0 +1,12 @@
+StudentsGroups(StudentId, StudentName, GroupName) :-
+        Groups(GroupId, GroupName), 
+    Students(StudentId, StudentName, GroupId).
+ 
+StudentHasMark(StudentId) :-
+    Students(StudentId, _, _),
+    Courses(CourseId, :CourseName),
+    Marks(StudentId, CourseId, _).
+ 
+R22(StudentId, StudentName, GroupName) :-   
+    StudentsGroups(StudentId, StudentName, GroupName),
+    not StudentHasMark(StudentId).

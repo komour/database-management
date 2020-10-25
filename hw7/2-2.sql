@@ -1,0 +1,27 @@
+CREATE TABLE LosertT AS SELECT * FROM Losers;
+
+
+CREATE FUNCTION update_losers_with_marks()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+BEGIN
+	IF TG_OP = 'TRUNCATE' THEN
+		TRUNCATE LoserT;
+	ELSE
+	DELETE FROM LoserT
+	WHERE StudentId = OLD.StudentId;
+	INSERT INTO LosertT (SELECT * FROM Losers 
+		WHERE Losers.StudentId = NEW.StudentId);
+	END IF;
+	RETURN NEW;
+END;
+$$
+
+
+CREATE TRIGGER update_losers
+	AFTER INSERT OR DELETE OR UPDATE OR TRUNCATE 
+	ON Marks
+	FOR EACH ROW 
+	EXECUTE PROCEDURE update_losers_with_marks();

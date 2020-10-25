@@ -1,0 +1,6 @@
+R3(StudentId, StudentName, GroupId) :-
+	Students(StudentId, StudentName, GroupId),
+	Courses(CourseId, CourseName),
+	Marks(StudentId, CourseId, Mark),
+    CourseName = :CourseName,
+    Mark = :Mark.

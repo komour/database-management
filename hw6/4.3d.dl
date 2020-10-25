@@ -1,0 +1,15 @@
+StudentsHaveMarks(StudentId, CourseId) :-
+    Lecturers(LecturerId, :LecturerName),
+    Plan(GroupId, CourseId, LecturerId),
+    Students(StudentId, _, _),
+    Marks(StudentId, CourseId, _).
+ 
+StudentWOAnyMark(StudentId) :-
+    Lecturers(LecturerId, :LecturerName),
+    Plan(GroupId, CourseId, LecturerId),
+    Students(StudentId, _, _),
+    not StudentsHaveMarks(StudentId, CourseId).
+ 
+R43(StudentId) :-
+    Students(StudentId, _, _),
+    not StudentWOAnyMark(StudentId).

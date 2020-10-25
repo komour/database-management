@@ -1,0 +1,19 @@
+CREATE FUNCTION update_points()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+BEGIN
+	IF OLD.Mark > NEW.Mark THEN
+		RETURN OLD;
+	ELSE
+		RETURN NEW;
+	END IF;
+END;
+$$
+
+CREATE TRIGGER points_update
+	BEFORE UPDATE 
+	ON Marks
+	FOR EACH ROW 
+	EXECUTE PROCEDURE update_points();

@@ -1,0 +1,12 @@
+AllMarks(StudentId, CourseId) :-
+    Marks(StudentId, CourseId, _).
+ 
+NotPass(GroupId, CourseId) :-
+    Courses(CourseId, _),
+    Students(StudentId, _, GroupId),
+    not AllMarks(StudentId, CourseId).
+ 
+R51(GroupId, CourseId) :-
+    Groups(GroupId, _),
+    Courses(CourseId, _),
+    not NotPass(GroupId, CourseId).

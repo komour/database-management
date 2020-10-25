@@ -1,0 +1,14 @@
+StudentsHaveCourse(StudentId, StudentName, GroupName) :-
+        Groups(GroupId, GroupName), 
+    Students(StudentId, StudentName, GroupId),
+    Courses(CourseId, :CourseName),
+    Plan(GroupId, CourseId, _).
+ 
+StudentHasMark(StudentId) :-
+    Students(StudentId, _, GroupId),
+    Courses(CourseId, :CourseName),
+    Marks(StudentId, CourseId, _).
+
+R23(StudentId, StudentName, GroupName) :-   
+    StudentsHaveCourse(StudentId, StudentName, GroupName),
+    not StudentHasMark(StudentId).
