@@ -1,7 +1,6 @@
-DELETE FROM Students
+DELETE FROM Students 
 WHERE StudentId IN (SELECT StudentId
-     FROM Students s
-     WHERE (SELECT COUNT(Mark)
-     		FROM (Students NATURAL JOIN Plan) NATURAL JOIN Marks AS J
-     		WHERE Mark < 60
-     		AND J.StudentId = s.StudentId) >= 3)
+	FROM (Students NATURAL JOIN Plan) NATURAL LEFT JOIN Marks
+	WHERE Mark < 60 OR Mark is NULL
+	GROUP BY StudentId
+    HAVING COUNT(StudentId) > 3)

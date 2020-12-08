@@ -1,5 +1,5 @@
 CREATE VIEW Losers AS
-    SELECT StudentId, COUNT(StudentId)
-    FROM (Students NATURAL JOIN Plan) NATURAL JOIN Marks
-    WHERE Mark < 60
+    SELECT StudentId, COUNT(StudentId) as DebtsCount
+    FROM (Students NATURAL JOIN Plan) NATURAL LEFT JOIN Marks
+    WHERE Mark < 3 OR Mark IS NULL
     GROUP BY StudentId
